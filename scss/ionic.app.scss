@@ -21,3 +21,20 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+.home-container {
+     display: -webkit-flex;
+     -webkit-flex-direction: column;
+     height: 100%;
+}
+.home-container > .row {
+     -webkit-flex: 1;
+}
+
+.header {
+     -webkit-flex: 1.5 !important;
+     //-webkit-align-items: center;
+}
+
+.icon-row {
+     -webkit-align-items: center;
+}

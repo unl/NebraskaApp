@@ -32,6 +32,11 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     controller: 'MainCtrl'
   })
 
+  .state('news', {
+  url: '/news',
+  templateUrl: 'templates/news.html',
+})
+
     .state('app', {
     url: '/app',
     abstract: true,
@@ -76,5 +81,5 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/main');
+  $urlRouterProvider.otherwise('/news');
 });
