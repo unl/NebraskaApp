@@ -1,34 +1,20 @@
 <ion-view view-title="News">
   <ion-content>
     <h1><center>News</center></h1>
+    <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+    <ion-list>
+    	<ion-item ng-if="newItems.length > 0" ng-click="doRefresh()">
+    		{{newItems.length}} new items
+    	</ion-item>
+    	<ion-item ng-repeat="item in items">
+    		<!-- <img src="{{item.picture.thumbnail}} " /> -->
+    	 <h2>{{item}} </h2>
 
-    <div class="list">
+        <!-- <h2>{{item}} </h2> -->
 
-    <a class="item item-thumbnail-left" href="#">
-      <img src="cover.jpg">
-      <h2>Title</h2>
-      <p># hours ago</p>
-    </a>
+    	</ion-item>
+    </ion-list>
+    <ion-infinite-scroll on-infinite="loadMore()" distance="5%"></ion-infinite-scroll>
 
-    <a class="item item-thumbnail-left" href="#">
-      <img src="cover.jpg">
-      <h2>Title</h2>
-      <p># hours ago</p>
-    </a>
-
-    <a class="item item-thumbnail-left" href="#">
-      <img src="cover.jpg">
-      <h2>Title</h2>
-      <p># hours ago</p>
-    </a>
-
-    <a class="item item-thumbnail-left" href="#">
-      <img src="cover.jpg">
-      <h2>Title</h2>
-      <p># hours ago</p>
-    </a>
-
-
-</div>
   </ion-content>
 </ion-view>
