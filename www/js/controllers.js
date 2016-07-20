@@ -62,48 +62,76 @@ angular.module('starter.controllers', [])
   $scope.items = [];
   $scope.newItems = [];
   $scope.imageLinks =[];
+  var final ={};
+  var images =[];
+  $scope.finalItems = [];
 
   PersonService.GetFeed().then(function(items){
-
+    //var  actualObj = items.data;
+    $scope.finalItems = items.data;
     for (var i = 0; i < items.data.length; i++) {
+        final = items.data[i];
+        var count =0;
+      $http.get(items.data[i].link,
+                    {transformResponse:function(data) {
+                      // convert the data to JSON and provide
+                      // it to the success function below
+                        // var x2js = new X2JS();
+                        // var json = x2js.xml_str2json( data );
+                        var indexStart = data.indexOf("<img src=");
 
-      console.log(items.data[i].link);
+                        var res = data.substring(indexStart, indexStart+200);
+                          var indexEnd = res.indexOf("width=");
+                            var link = res.substring(10, (indexEnd-2));
+                            //items.data[i].image = link;
+                            $scope.imageLinks.push(link);
+                            images.push(link);
+                            final.image = link;
+                          //  $scope.finalItems.push(final);
+                            $scope.finalItems[count].image= link;
+                            count=count+1;
+                            //  $scope.finalItems['image']=link;
+
+                              //actualObj["image"] = link;
+
+                      //  return items = json.rss.channel.item;
+
+                      //console.log(images.length);
+                        }
+
+                    }
+
+                ).success(function(data, status) {
+                    // send the converted data back
+                    // to the callback function
+//console.log(images.length);
+//$scope.newItems.image = images;
+                    //return items = data;
+
+                    //callback(data);
+                })
+
+
+      //console.log(items.data[i].link);
     }
+
+    // console.log(imageLinks.length);
+    //
+    // for (var i = 0; i < $scope.imageLinks.length; i++) {
+    //         console.log($scope.imageLinks[i]);
+    // }
 // for (var item in items.data) {
 //     console.log(item);
 // }
+  //$scope.newItems = actualObj
 
 
-  $http.get('http://news.unl.edu/newsrooms/unltoday/article/cic-becomes-big-ten-academic-alliance/',
-                {transformResponse:function(data) {
-                  // convert the data to JSON and provide
-                  // it to the success function below
-                    // var x2js = new X2JS();
-                    // var json = x2js.xml_str2json( data );
-                    var indexStart = data.indexOf("<img src=");
-
-                    var res = data.substring(indexStart, indexStart+200);
-                      var indexEnd = res.indexOf("width=");
-                        var link = res.substring(10, (indexEnd-2));
-
-                        var  actualObj = items.data;
-                        //  actualObj["image"] = link;
-
-                  //  return items = json.rss.channel.item;
-                    }
-                }
-            ).success(function(data, status) {
-                // send the converted data back
-                // to the callback function
-//console.log("HAHAHAHHAH");
-                //return items = data;
-
-                //callback(data);
-            })
 
             	$scope.items = items.data;
 
   });
+
+
 
   $scope.doRefresh = function() {
 		if($scope.newItems.length > 0){

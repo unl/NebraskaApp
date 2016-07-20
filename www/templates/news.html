@@ -6,11 +6,13 @@
     	<ion-item ng-if="newItems.length > 0" ng-click="doRefresh()">
     		{{newItems.length}} new items
     	</ion-item>
-    	<ion-item ng-repeat="item in items">
-    		<!-- <img src="{{item.picture.thumbnail}} " /> -->
-    	 <h2>{{item}} </h2>
+    	<ion-item class="item-thumbnail-left" ng-repeat="item in finalItems">
 
-        <!-- <h2>{{item}} </h2> -->
+
+        <img src="{{item.image}} " />
+  		<h2>{{item.title}}</h2>
+
+
 
     	</ion-item>
     </ion-list>
