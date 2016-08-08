@@ -22,6 +22,22 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   });
 })
 
+// .config(function($cordovaInAppBrowserProvider) {
+//
+//   var defaultOptions = {
+//     location: 'no',
+//     clearcache: 'no',
+//     toolbar: 'no'
+//   };
+//
+//   document.addEventListener("deviceready", function () {
+//
+//     $cordovaInAppBrowserProvider.setDefaultOptions(options)
+//
+//   }, false);
+// })
+
+
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
@@ -37,6 +53,31 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   templateUrl: 'templates/news.html',
     controller: 'NewsCtrl'
 })
+
+.state('article', {
+url: '/article/:id',
+templateUrl: 'templates/article.html',
+  controller: 'ArticleCtrl'
+})
+
+.state('dinning', {
+url: '/dinning',
+templateUrl: 'templates/dinning.html',
+controller: 'DinningCtrl'
+})
+
+.state('athletics', {
+url: '/athletics',
+templateUrl: 'templates/athletics.html',
+controller: 'AthleticsCtrl'
+})
+
+.state('directory', {
+url: '/directory',
+templateUrl: 'templates/directory.html',
+controller: 'DirectoryCtrl'
+})
+
 
     .state('app', {
     url: '/app',
@@ -82,5 +123,5 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/news');
+  $urlRouterProvider.otherwise('/main');
 });

@@ -58,50 +58,101 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('NewsCtrl', function($scope, $timeout, PersonService, $http) {
+.controller('NewsCtrl', function($scope, $timeout, PersonService, $http, $state) {
+
+  $scope.openInAppBrowser = function()
+  {
+  //    var link ='';
+  //   PersonService.GetFeed().then(function(items){
+  //     //console.log(items.data[articleid].title);
+  //   var article = items.data[id];
+  //  //  console.log(items.data[articleid]);
+  //     link = article.link;
+   //
+  //   })
+    var link ='http://news.unl.edu/newsrooms/unltoday/';
+    console.log(link);
+   // Open in app browser
+
+   window.open(link,'_blank', 'location=yes', 'closebuttoncaption=Return');
+  };
+
+
+
+
+  $scope.goHome = function(){
+    $state.go('main');
+  }
+
   $scope.items = [];
   $scope.newItems = [];
   $scope.imageLinks =[];
   var final ={};
   var images =[];
   $scope.finalItems = [];
-
+  var count =0;
   PersonService.GetFeed().then(function(items){
     //var  actualObj = items.data;
+  //  console.log("hahahahahhah");
     $scope.finalItems = items.data;
+    $scope.items = items.data;
+
     for (var i = 0; i < items.data.length; i++) {
         final = items.data[i];
-        var count =0;
+
+
+
+          //console.log(tLink);
+          $scope.items[i].id= i;
+
       $http.get(items.data[i].link,
                     {transformResponse:function(data) {
                       // convert the data to JSON and provide
                       // it to the success function below
                         // var x2js = new X2JS();
-                        // var json = x2js.xml_str2json( data );
-                        var indexStart = data.indexOf("<img src=");
 
-                        var res = data.substring(indexStart, indexStart+200);
-                          var indexEnd = res.indexOf("width=");
-                            var link = res.substring(10, (indexEnd-2));
-                            //items.data[i].image = link;
-                            $scope.imageLinks.push(link);
-                            images.push(link);
-                            final.image = link;
-                          //  $scope.finalItems.push(final);
-                            $scope.finalItems[count].image= link;
-                            count=count+1;
+                        // var json = x2js.xml_str2json( data );
+                      return data;
+                              //  console.log(count);
+                                //  console.log($scope.finalItems);
                             //  $scope.finalItems['image']=link;
 
                               //actualObj["image"] = link;
 
                       //  return items = json.rss.channel.item;
 
-                      //console.log(images.length);
+
                         }
 
                     }
 
                 ).success(function(data, status) {
+                  //console.log(count);
+                  var indexStart = data.indexOf("<img src=");
+
+                  var res = data.substring(indexStart, indexStart+200);
+                    var indexEnd = res.indexOf("width=");
+                      var link = res.substring(10, (indexEnd-2));
+                      //items.data[i].image = link;
+                      $scope.imageLinks.push(link);
+                      images.push(link);
+                      final.image = link;
+                      var hours = items.data[count].pubDate;
+                      var teaserText = items.data[count].description;
+                      hours = hours.substring(0,(hours.length-15));
+//  console.log(teaserText);
+
+                        var pStart = teaserText.indexOf("<p>");
+                        var pEnd = teaserText.indexOf("</p>");
+                      teaserText = teaserText.substring(pStart+3,pEnd);
+                      //  console.log(teaserText);
+                        $scope.items[count].time= hours;
+                        $scope.items[count].teaserText= teaserText;
+                    //  $scope.finalItems.push(final);
+                      $scope.finalItems[count].image= link;
+                      $scope.items[count].image= link;
+                      count=count+1;
+
                     // send the converted data back
                     // to the callback function
 //console.log(images.length);
@@ -127,7 +178,7 @@ angular.module('starter.controllers', [])
 
 
 
-            	$scope.items = items.data;
+
 
   });
 
@@ -183,10 +234,181 @@ angular.module('starter.controllers', [])
   ];
 })
 
+
+.controller('ArticleCtrl', function($scope, $stateParams, $scope, PersonService, $http, $ionicHistory, $ionicViewSwitcher, $state) {
+
+
+  $scope.goBackState = function(){
+    $ionicViewSwitcher.nextDirection('back');
+    $ionicHistory.goBack();
+  }
+
+  $scope.goHome = function(){
+    $state.go('main');
+  }
+  var articleid = $stateParams.id;
+ //console.log($stateParams.id);
+ var texts = [];
+ var article ={};
+ PersonService.GetFeed().then(function(items){
+   //console.log(items.data[articleid].title);
+   article = items.data[articleid];
+//  console.log(items.data[articleid]);
+   console.log(items.data[articleid].link);
+
+    $http.get(items.data[articleid].link).then(function(response){
+    	var content = response.data;
+
+      var indexStart = content.indexOf("<img src=");
+
+      var res = content.substring(indexStart, indexStart+200);
+        var indexEnd = res.indexOf("width=");
+          var link = res.substring(10, (indexEnd-2));
+          console.log(link);
+
+        var indexStart = content.indexOf("<p>");
+      //  console.log(indexStart);
+        var trimmedContent = content.substring(indexStart,content.length);
+      //  console.log(content.length);
+          var indexEnd = trimmedContent.indexOf("</div>");
+          trimmedContent = trimmedContent.substring(0,indexEnd);
+            trimmedContent = trimmedContent.replace(/<p>/g, "");
+        trimmedContent = trimmedContent.replace(/<\/p>/g, "HAHAHAHA123");
+         texts = trimmedContent.split("HAHAHAHA123");
+      //  console.log(texts.length);
+        //  console.log(trimmedContent);
+          //
+        // while (true) {
+        //   indexEnd = trimmedContent.indexOf("</p>");
+        //   console.log(indexEnd);
+        //   if (indexEnd!=null) {
+        //     lastIndex = indexEnd;
+        //     trimmedContent = trimmedContent.substring(indexEnd,trimmedContent.length);
+        //   }
+        //
+        // }
+      //  console.log(lastIndex);
+      //console.log(stuff);
+      //article.stuff = stuff;
+
+      article.link = link;
+      $scope.texts = texts;
+      $scope.article = article;
+    //  console.log(texts);
+    	return content;
+    });
+    //  for (var i = 0; i < items.data.length; i++) {
+    //    console.log(items.data[i].title);
+    //  }
+ })
+
+
+
+
+})
+
+.controller('DinningCtrl', function($scope, $stateParams, $state) {
+
+  $scope.goHome = function(){
+    $state.go('main');
+  }
+
+})
+
+
+.controller('AthleticsCtrl', function($scope, $stateParams, $state) {
+
+  $scope.goHome = function(){
+    $state.go('main');
+  }
+
+})
+
+.controller('DirectoryCtrl', function($scope, $stateParams, $state) {
+
+  $scope.goHome = function(){
+    $state.go('main');
+  }
+
+})
+
+
+
+
+
+
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 })
 
 .controller("MainCtrl", function($scope, $ionicSlideBoxDelegate) {
+
+  $scope.openInAppBrowserNews = function()
+  {
+    var link ='http://news.unl.edu/newsrooms/unltoday/';
+    console.log(link);
+   // Open in app browser
+   window.open(link,'_blank', 'location=yes', 'closebuttoncaption=Return');
+  };
+
+  $scope.openInAppBrowserDirectory = function()
+  {
+    var link ='https://directory.unl.edu';
+   // Open in app browser
+   window.open(link,'_blank', 'location=yes', 'closebuttoncaption=Return');
+  };
+
+  $scope.openInAppBrowserEvents = function()
+  {
+    var link ='https://events.unl.edu';
+   // Open in app browser
+   window.open(link,'_blank', 'location=yes', 'closebuttoncaption=Return');
+  };
+
+
+$scope.openInAppBrowserCourses = function()
+{
+  var link ='https://bulletin.unl.edu/undergraduate/courses/search';
+ // Open in app browser
+ window.open(link,'_blank', 'location=yes', 'closebuttoncaption=Return');
+};
+
+$scope.openInAppBrowserEmergency = function()
+{
+  var link ='http://emergency.unl.edu';
+ // Open in app browser
+ window.open(link,'_blank', 'location=yes', 'closebuttoncaption=Return');
+};
+
+
+$scope.openInAppBrowserMaps = function()
+{
+  var link ='https://maps.unl.edu';
+ // Open in app browser
+ window.open(link,'_blank', 'location=yes', 'closebuttoncaption=Return');
+};
+
+
+
+$scope.openInAppBrowserAthletics = function()
+{
+  var link ='http://www.huskers.com';
+ // Open in app browser
+ window.open(link,'_blank', 'location=yes', 'closebuttoncaption=Return');
+};
+
+$scope.openInAppBrowserDinning = function()
+{
+  var link ='http://housing.unl.edu/dining-center-hours';
+ // Open in app browser
+ window.open(link,'_blank', 'location=yes', 'closebuttoncaption=Return');
+};
+
+$scope.openInAppBrowserMedia = function()
+{
+  var link ='https://mediahub.unl.edu/search/';
+ // Open in app browser
+ window.open(link,'_blank', 'location=yes', 'closebuttoncaption=Return');
+};
 
     $scope.images = [];
 

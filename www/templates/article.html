@@ -1,0 +1,44 @@
+<ion-view view-title="">
+  <ion-nav-bar>
+    <ion-nav-buttons side="left">
+         <a ng-click="goBackState()" class="button button-icon icon ion-ios-arrow-thin-left"></a>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+         <a ng-click="goHome()" class="button button-icon icon ion-ios-home-outline"></a>
+    </ion-nav-buttons>
+</ion-nav-bar>
+  <ion-content>
+
+  <!-- <h2 >{{article.title}}</h2>
+
+<img class="full-image" src="{{article.link}}">
+    <div ng-repeat="text in texts">
+
+
+    <p>  {{text}}</p>
+    </div> -->
+
+<div class="list card">
+
+  <div class="item item-text-wrap">
+
+    <h2>{{article.title}}</h2>
+    <p>{{article.pubDate}}</p>
+  </div>
+
+  <div class="item item-body">
+    <img class="full-image" src="{{article.link}}">
+    <div ng-repeat="text in texts">
+
+
+    <p>  {{text}}</p>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+  </ion-content>
+</ion-view>

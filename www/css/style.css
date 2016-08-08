@@ -1,1 +1,18 @@
 /* Empty. Add your own CSS if you like */
+.tile{
+  width: 150px;
+ height: 100px;
+ text-align: center;
+ border-color: #00FFFF;
+ background-color: #FFFFFF;
+}
+
+.search{
+  border-color: grey;
+  border-width: medium;
+background-color: white;
+}
+
+.lightColor{
+  color: grey;
+}

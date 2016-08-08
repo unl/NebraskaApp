@@ -11,7 +11,7 @@
      <div class = "row icon-row">
        <div class = "col text-center">
 
-         <a class="button button-icon">
+         <a class="button button-icon" ng-click="openInAppBrowserDinning()">
                 <img src="img/dining.png" style="width:70%;height:10%"></img>Dining
             </a>
        <!-- <a class="button button-clear button-dark" href="#" >
@@ -27,7 +27,7 @@
      </div>
      <div class = "col text-center">
 
-     <a class="button button-icon">
+     <a class="button button-icon" ng-click="openInAppBrowserCourses()">
             <img src="img/courses.png" style="width:70%;height:10%"></img>Courses
         </a>
      <!--
@@ -43,8 +43,8 @@
      </a> -->
      </div>
      <div class = "col text-center">
-     <a class="button button-icon">
-            <img src="img/incident.png" style="width:70%;height:10%"></img>Incidents
+     <a class="button button-icon" ng-click="openInAppBrowserEmergency()">
+            <img src="img/incident.png" style="width:70%;height:10%"></img>Emergency
         </a>
      <!-- <a class="button button-clear button-dark" href="#" >
 
@@ -63,8 +63,8 @@
      <div class = "row icon-row">
        <div class = "col text-center">
 
-         <a class="button button-icon">
-                <img src="img/video.png" style="width:70%;height:10%"></img>Videos
+         <a class="button button-icon" ng-click="openInAppBrowserMedia()">
+                <img src="img/video.png" style="width:70%;height:10%"></img>Media Hub
             </a>
        <!-- <a class="button button-clear button-dark" href="#" >
 
@@ -79,7 +79,7 @@
      </div>
      <div class = "col text-center">
 
-     <a class="button button-icon">
+     <a class="button button-icon" ng-click="openInAppBrowserEvents()">
             <img src="img/events.png" style="width:70%;height:10%"></img>Events
         </a>
      <!--
@@ -95,7 +95,7 @@
      </a> -->
      </div>
      <div class = "col text-center">
-     <a class="button button-icon">
+     <a class="button button-icon" ng-click="openInAppBrowserMaps()">
             <img src="img/map.png" style="width:70%;height:10%"></img>Maps
         </a>
      <!-- <a class="button button-clear button-dark" href="#" >
@@ -119,7 +119,7 @@
   <div class = "row icon-row">
     <div class = "col text-center">
 
-      <a class="button button-icon" href="#news">
+      <a class="button button-icon" ng-click="openInAppBrowserNews()">
              <img src="img/news.png" style="width:70%;height:10%"></img>News
          </a>
     <!-- <a class="button button-clear button-dark" href="#" >
@@ -135,7 +135,7 @@
 </div>
 <div class = "col text-center">
 
-  <a class="button button-icon">
+  <a class="button button-icon" ng-click="openInAppBrowserDirectory()">
          <img src="img/directory.png" style="width:70%;height:10%"></img>Directory
      </a>
 <!--
@@ -151,7 +151,7 @@ Directory
 </a> -->
 </div>
 <div class = "col text-center">
-  <a class="button button-icon">
+  <a class="button button-icon" ng-click="openInAppBrowserAthletics()">
          <img src="img/athletics.png" style="width:70%;height:10%"></img>Athletics
      </a>
 <!-- <a class="button button-clear button-dark" href="#" >

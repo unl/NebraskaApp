@@ -1,22 +1,63 @@
-<ion-view view-title="News">
+<ion-view view-title="UNL Today">
+  <ion-nav-bar>
+    <ion-nav-buttons side="left">
+         <!-- <a ng-click="goBackState()" class="button button-icon icon ion-ios-arrow-thin-left"></a> -->
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+         <a ng-click="goHome()" class="button button-icon icon ion-ios-home-outline"></a>
+    </ion-nav-buttons>
+</ion-nav-bar>
   <ion-content>
-    <h1><center>News</center></h1>
-    <ion-refresher on-refresh="doRefresh()"></ion-refresher>
-    <ion-list>
-    	<ion-item ng-if="newItems.length > 0" ng-click="doRefresh()">
+    <!-- <div class="row">
+      <div class="col col-33 col-offset-33"><h1>News</h1></div>
+  <div class="col">  <a class="button button-dark button-clear" href="#main">
+      <i class="icon ion-home"></i>
+    </a></div>
+
+
+  </div> -->
+    <!-- <ion-refresher on-refresh="doRefresh()"></ion-refresher> -->
+    <!-- <ion-list> -->
+    	<!-- <ion-item ng-if="newItems.length > 0" ng-click="doRefresh()">
     		{{newItems.length}} new items
-    	</ion-item>
-    	<ion-item class="item-thumbnail-left" ng-repeat="item in finalItems">
+    	</ion-item> -->
+    	<!-- <ion-item class="item-thumbnail-left item-text-wrap" ng-repeat="item in items" href="{{item.link}}">
 
 
-        <img src="{{item.image}} " />
+        <img src="{{item.image}}" />
   		<h2>{{item.title}}</h2>
+      <p>{{item.time}}</p>
 
 
 
     	</ion-item>
-    </ion-list>
-    <ion-infinite-scroll on-infinite="loadMore()" distance="5%"></ion-infinite-scroll>
+    </ion-list> -->
+    <!-- <ion-infinite-scroll on-infinite="loadMore()" distance="5%"></ion-infinite-scroll> -->
+
+    <div class="list card item-text-wrap" ng-repeat="item in items" >
+
+      <div class="item">
+
+        <h2>{{item.title}}</h2>
+        <p>{{item.time}}</p>
+      </div>
+
+      <div class="item item-body">
+        <img class="full-image" src="{{item.image}}">
+        <p>{{item.teaserText}}</p>
+        <!-- <a class="icon ion-ios-glasses-outline" href="#"></a> -->
+        <a class="button button-clear button-dark" href="#/article/{{item.id}}">
+      <i class="icon ion-ios-glasses-outline"></i>
+    </a>
+
+<a ng-click="openInAppBrowser()" class="button button-icon icon ion-earth"></a>
+
+      </div>
+
+    </div>
+
+
+
 
   </ion-content>
 </ion-view>
