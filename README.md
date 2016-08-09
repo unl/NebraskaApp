@@ -1,5 +1,10 @@
 # NebraskaApp
 
+What do you need to know before getting started...
+1. HTML 5, CSS, javascript
+2. Angular js: https://angularjs.org
+3. Cordova: https://cordova.apache.org
+
 After clonning this repo, make sure that you have the necessary plugins installed. The plugins are outlined in the package.json file.
 
 Getting started with Ionic...
@@ -15,12 +20,6 @@ Quick way to test with Live reload: ionic serve --lab     (Note: this will not r
 
 Publishing your app: http://ionicframework.com/docs/guide/publishing.html
 
-///////////////////////////////////////////////////////////////////////////////////////////////
-What do you need to know before getting started...
-1. HTML 5, CSS, javascript
-2. Angular js: https://angularjs.org
-3. Cordova: https://cordova.apache.org
-//////////////////////////////////////////////////////////////////////////////////////////////
 Future work...
 Ionic 2.0(currently beta) has much better Progressive web app capabilities: http://ionicframework.com/docs/v2/resources/progressive-web-apps/
 
